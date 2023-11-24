@@ -1,5 +1,3 @@
-rafce
-
 import React from 'react'
 
 const Cartao = (props) => {
@@ -12,11 +10,4 @@ const Cartao = (props) => {
     </div>
   )
 }
-
-{/* <Cartao>
-  <Pedido />
-  <p>fewakçlj</p>
-</Cartao> */}
-
-
 export default Cartao
