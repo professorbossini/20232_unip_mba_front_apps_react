@@ -72,13 +72,37 @@ class App extends React.Component{
    return <div className="container mt-2">
     <div className="row justify-content-center">
       <div className="col-md-8">
+        
         <div className="card">
+          
           <div className="card-body">
+            
             <div className="d-flex align-items-center" style={{height: '6rem'}}>
               <i className={`fa-solid fa-5x ${this.state.icone}`}></i>
+              <p className='ms-3 fs-1 w-75 text-center'>{this.state.estacao}</p>
             </div>
+            
+            <div>
+              <p className="text-center">
+                {
+                  this.state.latitude ?
+                  `Latitude: ${this.state.latitude}, Longitude: ${this.state.longitude}` 
+                  :
+                  'Clique no botão para saber a sua estação climática'
+                }
+              </p>
+            </div>
+          
+            
+            <button 
+              onClick={this.obterLocalizacao}
+              className="btn btn-outline-primary w-100 mt-2">
+                Qual a minha estação?
+            </button>
           </div>
+                
         </div>
+
       </div>
     </div>
    </div>
