@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
+import '@fortawesome/fontawesome-free/css/all.min.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
@@ -68,9 +69,19 @@ class App extends React.Component{
   }
 
   render(){
-    return <div>
-      {this.state.latitude}
+   return <div className="container mt-2">
+    <div className="row justify-content-center">
+      <div className="col-md-8">
+        <div className="card">
+          <div className="card-body">
+            <div className="d-flex align-items-center" style={{height: '6rem'}}>
+              <i className={`fa-solid fa-5x ${this.state.icone}`}></i>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+   </div>
   }
 }
 
