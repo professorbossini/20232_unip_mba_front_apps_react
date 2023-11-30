@@ -2,21 +2,45 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import EstacaoClimatica from './EstacaoClimatica'
 
 class App extends React.Component{
   
-  constructor(props){
-    super(props)
-    this.state = {
-      latitude: null,
-      longitude: null,
-      estacao: null,
-      data: null,
-      icone: null,
-      mensagemDeErro: null
-    }  
+  // constructor(props){
+  //   super(props)
+  //   // this.state = {
+  //   //   latitude: null,
+  //   //   longitude: null,
+  //   //   estacao: null,
+  //   //   data: null,
+  //   //   icone: null,
+  //   //   mensagemDeErro: null
+  //   // }
+  //   console.log('constructor')  
+  // }
+
+  state = {
+    latitude: null,
+    longitude: null,
+    estacao: null,
+    data: null,
+    icone: null,
+    mensagemDeErro: null
   }
 
+  componentDidMount(){
+    this.obterLocalizacao()
+    console.log('componentDidMount')
+  }
+
+  componentDidUpdate(){
+    console.log('componentDidUpdate')
+  }
+
+  componentWillUnmount(){
+    console.log('componentWillUnmount')
+  }
+  
   obterEstacao = (data, latitude) => {
     const anoAtual = data.getFullYear()
     //21/06
@@ -33,7 +57,7 @@ class App extends React.Component{
     if(data >= d2 && data < d3)
       return sul ? 'Primavera' : 'Outono'
     if(data >= d3 || data < d4)
-      return sul ? 'Verão' : 'Inverno'
+    return sul ? 'Verão' : 'Inverno'
     return sul ? 'Outono' : 'Primavera'
   }
 
@@ -70,52 +94,24 @@ class App extends React.Component{
     )
   }
 
-  // componentDidMount(){
-  //   this.obterLocalizacao()
-  // }
 
   render(){
-   return <div className="container mt-2">
-    <div className="row justify-content-center">
-      <div className="col-md-8">
-        
-        <div className="card">
-          
-          <div className="card-body">
-            
-            <div className="d-flex align-items-center" style={{height: '6rem'}}>
-              <i className={`fa-solid fa-5x ${this.state.icone}`}></i>
-              <p className='ms-3 fs-1 w-75 text-center'>{this.state.estacao}</p>
-            </div>
-            
-            <div>
-              <p className="text-center">
-                {
-                  this.state.latitude 
-                  ?
-                  `Latitude: ${this.state.latitude}, Longitude: ${this.state.longitude}` 
-                  :
-                  this.state.mensagemDeErro ?
-                    `${this.state.mensagemDeErro}`
-                  :
-                  'Clique no botão para saber a sua estação climática'
-                }
-              </p>
-            </div>
-          
-            
-            <button 
-              onClick={this.obterLocalizacao}
-              className="btn btn-outline-primary w-100 mt-2">
-                Qual a minha estação?
-            </button>
-          </div>
-                
+    console.log('render')
+    return <div className="container mt-2">
+      <div className="row justify-content-center">
+        <div className="col-md-8">
+         <EstacaoClimatica 
+          icone={this.state.icone}
+          estacao={this.state.estacao}
+          latitude={this.state.latitude}
+          longitude={this.state.longitude}
+          data={this.state.data}
+          mensagemDeErro={this.state.mensagemDeErro}
+          obterLocalizacao={this.obterLocalizacao}
+         />
         </div>
-
       </div>
     </div>
-   </div>
   }
 }
 
