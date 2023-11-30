@@ -12,7 +12,8 @@ class App extends React.Component{
       longitude: null,
       estacao: null,
       data: null,
-      icone: null
+      icone: null,
+      mensagemDeErro: null
     }  
   }
 
@@ -60,13 +61,18 @@ class App extends React.Component{
           data: data.toLocaleTimeString(),
           icone: icone
         })
+      },
+      (error) => {
+        this.setState({
+          mensagemDeErro: 'Tente novamente mais tarde'
+        })
       }
     )
   }
 
-  componentDidMount(){
-    this.obterLocalizacao()
-  }
+  // componentDidMount(){
+  //   this.obterLocalizacao()
+  // }
 
   render(){
    return <div className="container mt-2">
@@ -85,8 +91,12 @@ class App extends React.Component{
             <div>
               <p className="text-center">
                 {
-                  this.state.latitude ?
+                  this.state.latitude 
+                  ?
                   `Latitude: ${this.state.latitude}, Longitude: ${this.state.longitude}` 
+                  :
+                  this.state.mensagemDeErro ?
+                    `${this.state.mensagemDeErro}`
                   :
                   'Clique no botão para saber a sua estação climática'
                 }
