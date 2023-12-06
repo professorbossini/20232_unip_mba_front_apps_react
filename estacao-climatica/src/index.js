@@ -100,15 +100,22 @@ class App extends React.Component{
     return <div className="container mt-2">
       <div className="row justify-content-center">
         <div className="col-md-8">
-         <EstacaoClimatica 
-          icone={this.state.icone}
-          estacao={this.state.estacao}
-          latitude={this.state.latitude}
-          longitude={this.state.longitude}
-          data={this.state.data}
-          mensagemDeErro={this.state.mensagemDeErro}
-          obterLocalizacao={this.obterLocalizacao}
-         />
+          {
+            this.state.mensagemDeErro ?
+            <p className='border rounded p-2 fs-1 text-center'>
+              É preciso dar permissão para acesso à localização. Atualize a página e tente de novo, ajustando a configuração do seu navegador.
+            </p>
+            :
+            <EstacaoClimatica 
+              icone={this.state.icone}
+              estacao={this.state.estacao}
+              latitude={this.state.latitude}
+              longitude={this.state.longitude}
+              data={this.state.data}
+              mensagemDeErro={this.state.mensagemDeErro}
+              obterLocalizacao={this.obterLocalizacao}
+            />
+          }
         </div>
       </div>
     </div>

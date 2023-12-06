@@ -1,7 +1,37 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 export class EstacaoClimatica extends Component {
+
+  state = {
+    data: null
+  }
+  
+  componentDidUpdate(){
+    console.log('componentDidUpdate')
+  }
+
+  componentDidMount(){
+
+    this.timer = setInterval(() => {
+      //extrair a data atual do sistema
+      const dataAtual = new Date()
+      //atualizar o estado
+      //não faça isso
+      //this.state.data = dataAtual
+      this.setState({
+        data: dataAtual.toLocaleTimeString() //usar a biblioteca moment
+      })
+    }, 1000)
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.timer)  
+  }
+
+  timer = null
+
   render() {
+    console.log('render')
     return (
       <div className="card">
 
@@ -17,7 +47,7 @@ export class EstacaoClimatica extends Component {
               {
                 this.props.latitude
                   ?
-                  `Latitude: ${this.props.latitude}, Longitude: ${this.props.longitude}`
+                  `Latitude: ${this.props.latitude}, Longitude: ${this.props.longitude}. Data: ${this.state.data}`
                   :
                   this.props.mensagemDeErro ?
                     `${this.props.mensagemDeErro}`
