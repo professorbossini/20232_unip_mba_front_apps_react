@@ -3,6 +3,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import EstacaoClimatica from './EstacaoClimatica'
+import Loading from './Loading'
 
 class App extends React.Component{
   
@@ -105,6 +106,9 @@ class App extends React.Component{
             <p className='border rounded p-2 fs-1 text-center'>
               É preciso dar permissão para acesso à localização. Atualize a página e tente de novo, ajustando a configuração do seu navegador.
             </p>
+            :
+            !this.state.latitude ?
+            <Loading/>
             :
             <EstacaoClimatica 
               icone={this.state.icone}
