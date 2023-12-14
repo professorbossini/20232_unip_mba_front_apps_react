@@ -1,31 +1,51 @@
 import React from 'react'
 import Busca from './Busca'
-import { createClient } from 'pexels'
+import ListaImagens from './ListaImagens'
+// import { createClient } from 'pexels'
+import PexelsLogo from './PexelsLogo'
+import pexelsClient from '../utils/pexelsClient'
 export default class App extends React.Component {
   
   state = {
     pics: []
   }
 
-  pexelsClient = null
+  //pexelsClient = null
+
+  // onBuscaRealizada = (termo) => {
+  //   this.pexelsClient.photos.search({
+  //     query: termo
+  //   })
+  //   .then(pics => {
+  //     console.log(pics)
+  //     this.setState({pics: pics.photos})
+  //   })
+  // }
 
   onBuscaRealizada = (termo) => {
-    this.pexelsClient.photos.search({
-      query: termo
+    pexelsClient.get('/search', {
+      params: {
+        query: termo
+      }
     })
-    .then(pics => {
-      console.log(pics)
-      this.setState({pics: pics.photos})
-    })
+    .then(result => {
+      this.setState({pics: result.data.photos})
+    })  
   }
 
-  componentDidMount(){
-    this.pexelsClient = createClient('563492ad6f91700001000001e00b21ab6afb45a18c1d44a759556f14')
-  }
+
+
+
+  // componentDidMount(){
+  //   this.pexelsClient = createClient('563492ad6f91700001000001e00b21ab6afb45a18c1d44a759556f14')
+  // }
 
   render(){
       return (
         <div className='grid justify-content-center border-round border-1 border-400 w-9 m-auto p-3'>
+          <div className="col-12">
+            <PexelsLogo />
+          </div>
           <div className="col-12">
             <h1>Exibir uma lista de...</h1>
           </div>
@@ -35,13 +55,7 @@ export default class App extends React.Component {
             />
           </div>
           <div className="col-8">
-            {
-              this.state.pics.map((pic) => (
-                <div>
-                  <img src={pic.src.small} alt={pic.alt} />
-                </div>
-              ))
-            }
+            <ListaImagens pics={this.state.pics}/>
           </div>
         </div>
       )
