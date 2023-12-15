@@ -6,6 +6,7 @@ const ListaImagens = (props) => {
       <Imagem 
         pic={pic.src.small}
         alt={pic.alt}
+        imgStyle={props.imgStyle}
       />
     ))
   )

@@ -49,13 +49,18 @@ export default class App extends React.Component {
           <div className="col-12">
             <h1>Exibir uma lista de...</h1>
           </div>
-          <div className="col-8">
+          <div className="col-12">
             <Busca 
               onBuscaRealizada={this.onBuscaRealizada}
             />
           </div>
-          <div className="col-8">
-            <ListaImagens pics={this.state.pics}/>
+          <div className="col-12">
+            <div className='grid'>
+              <ListaImagens 
+                pics={this.state.pics}
+                imgStyle={'col-12 md:col-6 lg:col-4 xl:col-3'}
+                />
+            </div>
           </div>
         </div>
       )
